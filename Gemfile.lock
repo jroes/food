@@ -1,0 +1,22 @@
+PATH
+  remote: ~/src/Fatsecret
+  specs:
+    fatsecret-api (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    awesome_print (1.1.0)
+    blankslate (2.1.2.4)
+    parslet (1.5.0)
+      blankslate (~> 2.0)
+    toml (0.0.3)
+      parslet
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  awesome_print
+  fatsecret-api!
+  toml
