@@ -1,5 +1,6 @@
-PATH
-  remote: ~/src/Fatsecret
+GIT
+  remote: git://github.com/jroes/Fatsecret.git
+  revision: a100bbd7f3dd8e61b35d43fcd5529c169e4b7ccf
   specs:
     fatsecret-api (0.1.0)
 
