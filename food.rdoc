@@ -1,0 +1,5 @@
+= food
+
+Generate this with
+    food rdoc
+After you have described your command line interface

@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+require 'gli'
+require 'food'
+
+include GLI::App
+
+program_desc 'Query nutritional information for food.'
+
+version Food::VERSION
+
+desc 'Get nutritional info for a list of food items.'
+arg_name 'Space-separated list of foods'
+command :lookup do |c|
+  c.action do |global_options,options,args|
+    args.each do |item|
+      puts FoodFinder.find(item)
+    end
+  end
+end
+
+exit run(ARGV)
