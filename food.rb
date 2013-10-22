@@ -5,6 +5,7 @@ require 'bundler/setup'
 require 'fatsecret'
 require 'awesome_print'
 require 'toml'
+require 'pry'
 
 config = TOML.load_file('config.toml')
 FatSecret.init(config['key'], config['secret'])
@@ -83,7 +84,7 @@ class FoodFinder
     serving_listing = food_detail["food"]["servings"]["serving"]
 
     if serving_listing.is_a? Hash
-      [serving_listing["calories"] + "/" + serving_listing["serving_description"]]
+      [serving_listing]
     else
       serving_listing
     end
