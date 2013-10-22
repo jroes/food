@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'gli'
+require 'netrc'
 require 'food'
 
 include GLI::App
@@ -16,6 +17,12 @@ command :lookup do |c|
       puts FoodFinder.find(item)
     end
   end
+end
+
+pre do
+  consumer_key, shared_secret = Netrc.read["fatsecret.com"]
+  FatSecret.init(consumer_key, shared_secret)
+  true
 end
 
 exit run(ARGV)

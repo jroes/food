@@ -23,6 +23,6 @@ lib/food.rb
   s.add_development_dependency('rake')
   s.add_development_dependency('rdoc')
   s.add_development_dependency('aruba')
-  s.add_dependency('toml')
+  s.add_dependency('netrc')
   s.add_runtime_dependency('gli','2.5.6')
 end
