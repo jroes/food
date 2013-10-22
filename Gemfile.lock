@@ -9,8 +9,15 @@ GEM
   specs:
     awesome_print (1.1.0)
     blankslate (2.1.2.4)
+    coderay (1.0.9)
+    method_source (0.8.2)
     parslet (1.5.0)
       blankslate (~> 2.0)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    slop (3.4.6)
     toml (0.0.3)
       parslet
 
@@ -20,4 +27,5 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   fatsecret-api!
+  pry
   toml
