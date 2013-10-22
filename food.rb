@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'rubygems'
 require 'bundler/setup'
 require 'fatsecret'
@@ -35,7 +37,7 @@ class FoodFinder
   end
 
   def self.find_food(name)
-    matching_food = with_retry do 
+    matching_food = with_retry do
       FatSecret.search_food(name)
     end
 
@@ -49,7 +51,7 @@ class FoodFinder
     end
 
     (food_detail["food"]["brand_name"] || "") + " " +
-      food_detail["food"]["food_name"] + ": " + cals_per_serving(food_detail)
+      food_detail["food"]["food_name"] + ": " + short_info(food_detail)
   end
 
   def self.matching_food_id(matching_food)
@@ -61,18 +63,39 @@ class FoodFinder
     end
   end
 
-  def self.cals_per_serving(food_detail)
-    serving = food_detail["food"]["servings"]["serving"]
+  def self.short_info(food_detail)
+    first_serving = servings(food_detail).first
+    "%s %s cal %s crb %s fat %s fib %s pro" % [first_serving["serving_description"],
+                                          first_serving["calories"],
+                                          first_serving["carbohydrate"],
+                                          first_serving["fat"],
+                                          first_serving["fiber"],
+                                          first_serving["protein"]]
+  end
 
-    if serving.is_a? Hash
-      serving["calories"] + "/" + serving["serving_description"]
+  def self.cals_per_serving(food_detail)
+    servings(food_detail).
+      map { |serving| serving["calories"] + "/" + serving["serving_description"] }.
+      join(", ")
+  end
+
+  def self.servings(food_detail)
+    serving_listing = food_detail["food"]["servings"]["serving"]
+
+    if serving_listing.is_a? Hash
+      [serving_listing["calories"] + "/" + serving_listing["serving_description"]]
     else
-      serving.map { |serving| serving["calories"] + "/" + serving["serving_description"] }.
-        join(", ")
+      serving_listing
     end
   end
 end
 
-STDIN.read.split("\n").each do |line|
-  puts FoodFinder.find(line)
+if ARGV.any?
+  ARGV.each do |item|
+    puts FoodFinder.find(item)
+  end
+else
+  STDIN.read.split("\n").each do |line|
+    puts FoodFinder.find(line)
+  end
 end
