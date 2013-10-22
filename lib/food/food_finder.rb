@@ -1,9 +1,4 @@
 require 'fatsecret'
-require 'toml'
-
-# TODO: Move to a global API key switch
-config = TOML.load_file('config.toml')
-FatSecret.init(config['key'], config['secret'])
 
 class FoodFinder
   def self.find(name)
@@ -21,10 +16,10 @@ class FoodFinder
   def self.with_retry(&block)
     while true
       response = block.call
-      awesome_print(response) if ENV['DEBUG']
       break if error_free?(response)
       sleep 5
     end
+    raise StandardError.new(response) unless error_free?(response)
     response
   end
 
