@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'gli'
 require 'netrc'
+require 'fatsecret'
 require 'food'
 
 include GLI::App
