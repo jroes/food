@@ -24,6 +24,6 @@ lib/food.rb
   s.add_development_dependency('rdoc')
   s.add_development_dependency('aruba')
   s.add_dependency('netrc')
-  s.add_dependency('fatsecret')
+  s.add_dependency('fatsecret-api')
   s.add_runtime_dependency('gli','2.5.6')
 end

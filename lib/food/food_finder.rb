@@ -1,4 +1,5 @@
 require 'fatsecret'
+require 'securerandom'
 
 class FoodFinder
   def self.find(name)
